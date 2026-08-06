@@ -11,6 +11,10 @@ Visa att du behärskar **hela ML-processen** från rådata till utvärderad mode
 
 ## Projektbeslut
 
+- **Frågeställning:** Vilka livsstils- och studiefaktorer hänger starkast ihop med depression hos studenter – och hur långt räcker de för att förutsäga den?
+  - **Delfråga 02 (EDA):** Vilka variabler samvarierar med `Depression`, och hur starkt?
+  - **Delfråga 03 (Unsupervised):** Bildar livsstilsvariablerna naturliga grupper – och hänger de i så fall ihop med utfallet?
+  - **Delfråga 04 (Supervised):** Räcker enkla modeller för att förutsäga `Depression`, eller krävs flexibla och djupa?
 - **Dataset:** Student Depression Dataset (Kaggle, hopesb) – 27 901 studenter med livsstils- och studierelaterade variabler
 - **Målvariabel:** `Depression` (binär: ja/nej)
 - **Nyckelvariabler:** Academic Pressure, CGPA, Study Satisfaction, Sleep Duration, Dietary Habits, Work/Study Hours, Financial Stress, Family History of Mental Illness, Suicidal thoughts, Gender, Age, City
