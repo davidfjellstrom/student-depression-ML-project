@@ -5,7 +5,7 @@ och hur långt räcker de för att förutsäga den?**
 
 Ett komplett ML-projekt från rådata till utvärderad modell: dataförberedelse, EDA,
 unsupervised learning för hypotesgenerering, och fyra klassificeringsmodeller inklusive
-ett neuralt nätverk.
+ett neuralt nätverk – samt en interaktiv Streamlit-app kring den modell som valdes.
 
 ## Avgränsningar
 
@@ -36,6 +36,37 @@ rimligt balanserad (58.6% / 41.4%), så ingen balanseringsteknik som SMOTE behö
 | `04_Supervised.ipynb` | Räcker enkla modeller, eller krävs flexibla och djupa? | Fyra modeller, cross-validation, slututvärdering |
 
 Kör i ordning 01 → 04. `01` producerar `student_depression_clean.csv` som resten bygger på.
+
+Utöver notebooksen finns `export_model.py`, som sparar champion-modellen till
+`champion_model.joblib`, och `app.py` – Streamlit-appen som beskrivs nedan.
+
+## Interaktiv app
+
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+Appen låter en ställa in en studentprofil och se vad champion-modellen skattar för
+sannolikhet, tillsammans med en nedbrytning av vilka variabler som driver skattningen –
+möjlig just för att den valda modellen är tolkningsbar.
+
+**Åtta färdiga profiler (A–H)** visar hur variablerna samverkar. De är byggda som en
+systematisk 2×2×2 över de tre faktorer projektet identifierat som viktigast: ålder,
+press/stress och sömn. Övriga sju variabler är låsta vid datasetets medianvärden i
+samtliga profiler, så att skillnaden mellan två profiler enbart beror på de tre
+faktorerna – då går det att isolera en i taget (A mot B ger sömnens bidrag, A mot C
+ålderns, A mot E stressens). De faktiska depressionsandelarna i motsvarande grupper
+spänner från 15.9% till 90.6% och visas bredvid modellens skattning som
+rimlighetskontroll.
+
+Ingen skattning visas innan användaren gjort ett aktivt val – appen påstår inget om en
+profil som inte efterfrågats. `export_model.py` tränar om modellen med samma features,
+split och seed som `04_Supervised.ipynb` och verifierar mot notebookens test-AUC 0.8749,
+så att notebooken själv kan lämnas orörd.
+
+Appen är ett skolprojekt och inte ett medicinskt verktyg – den visar samband, inte orsak,
+och skattar för grupper med liknande svar, inte för enskilda personer.
 
 ## Svar på frågeställningen
 
