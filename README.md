@@ -1,23 +1,39 @@
 # Går det att förutsäga depression hos studenter?
 
+## Om projektet
+
 Ett maskininlärningsprojekt som undersöker vilka livsstils- och studiefaktorer som hänger
 ihop med depression hos studenter – och hur långt de räcker för att förutsäga den.
 
-Projektet går från rådata till färdig modell och jämför unsupervised learning, klassisk
-supervised learning och deep learning. Av fyra modeller valdes **logistisk regression, med
-test-AUC 0.8749, accuracy 80.0 % och recall 85.1 %**. Till projektet hör också en
-**Streamlit-app** som räknar ut hur sannolikt det är att en student är deprimerad, utifrån en
-profil du ställer in.
+Underlaget är ett öppet Kaggle-dataset med knappt 28 000 studenter, där varje rad beskriver en
+students situation: ålder, sömn, kost, akademisk press, ekonomisk stress, studietid och några
+faktorer till. Frågan projektet ställer är dubbel: *vad* hänger ihop med depression, och hur
+långt räcker de faktorerna för att faktiskt förutsäga vem som är deprimerad?
 
-Ett val påverkar hela projektet: datasetets starkaste variabel, frågan om självmordstankar, är
-**utesluten**. Den är ett symptom på depression, inte något som kommer före den. Se
+Arbetet går hela vägen från rådata till färdig modell, i fyra notebooks:
+
+1. **Dataförberedelse** – städning, kodning och en gemensam datamängd att bygga vidare på.
+2. **EDA** – utforskande analys av hur varje variabel förhåller sig till depression.
+3. **Unsupervised learning** – KMeans och PCA för att se om studenterna delar upp sig i
+   naturliga grupper, och för att generera hypoteser att testa.
+4. **Supervised learning** – fyra modeller, från logistisk regression till neuralt nätverk,
+   utvärderade mot ett testset som hålls undan hela vägen.
+
+Till projektet hör också en **Streamlit-app**, där man ställer in en studentprofil och ser vad
+den valda modellen kommer fram till och vilka variabler som drar åt vilket håll.
+
+Ett metodval präglar hela projektet: datasetets starkaste variabel, frågan om självmordstankar,
+är **utesluten**. Den är ett symptom på depression, inte något som kommer före den, och att ha
+kvar den hade gett en modell som mest upprepar svaret den redan fått. Se
 [Analysdokumentationen](docs/analys.md) för resonemanget.
 
 ---
 
 ## Resultat
 
-Alla siffror är mätta på ett testset som modellerna aldrig såg under träningen (5 569 studenter).
+Fyra modeller jämfördes. Valet föll på **logistisk regression**, som är minst lika bra som de
+mer avancerade alternativen och dessutom går att tolka. Alla siffror är mätta på ett testset
+som modellerna aldrig såg under träningen (5 569 studenter).
 
 | Modell | Accuracy | Precision | Recall | F1 | AUC-ROC (test) |
 |---|---:|---:|---:|---:|---:|
@@ -31,7 +47,7 @@ Alla siffror är mätta på ett testset som modellerna aldrig såg under tränin
 finns med för att visa vad 80 % är värt i sammanhanget.
 
 Alla fyra modeller hamnar mellan AUC 0.86 och 0.87. Att den enklaste modellen är lika bra som
-de mer avancerade är i sig ett resultat, och den valdes för att den är lätt att tolka.
+de mer avancerade är i sig ett resultat.
 
 ![ROC-kurvor för alla fyra modeller](images/roc_kurvor.png)
 
@@ -81,28 +97,45 @@ resten bygger på.
 
 ---
 
-## Kom igång
+## Kör Streamlit-appen
 
-Projektet är kört på **Python 3.13**.
+Projektet är kört på **Python 3.13**. Följ stegen i ordning, så är appen igång.
+
+**1. Hämta projektet**
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/davidfjellstrom/student-depression-ML-project.git
 cd student-depression-ML-project
-
-python3 -m venv venv          # Windows: python -m venv venv
-source venv/bin/activate      # Windows: venv\Scripts\activate
-
-pip install -r requirements.txt
-jupyter lab
 ```
 
----
+**2. Skapa och aktivera en virtuell miljö**
 
-## Kör appen
+```bash
+python3 -m venv venv          # Windows: python -m venv venv
+source venv/bin/activate      # Windows: venv\Scripts\activate
+```
+
+**3. Installera paketen**
+
+```bash
+pip install -r requirements.txt
+```
+
+**4. Starta appen**
 
 ```bash
 streamlit run app.py
 ```
+
+Appen öppnas i webbläsaren på `http://localhost:8501`. Modellen och datan ligger färdiga i
+repot, så inget behöver tränas först.
+
+Vill du i stället gå igenom notebooksen kör du `jupyter lab` i samma miljö. Kom ihåg att
+aktivera miljön igen (steg 2) om du öppnar ett nytt terminalfönster.
+
+---
+
+## Om appen
 
 I appen ställer du in en studentprofil och ser vad modellen kommer fram till, tillsammans med
 vilka variabler som påverkar resultatet mest. Det går just för att den valda modellen är lätt
