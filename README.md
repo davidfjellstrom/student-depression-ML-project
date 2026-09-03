@@ -3,7 +3,7 @@
 ## Om projektet
 
 Ett maskininlärningsprojekt som undersöker vilka livsstils- och studiefaktorer som hänger
-ihop med depression hos studenter – och hur långt de räcker för att förutsäga den.
+ihop med depression hos studenter – och hur långt de räcker för att förutsäga det.
 
 Underlaget är ett öppet Kaggle-dataset med knappt 28 000 studenter, där varje rad beskriver en
 students situation: ålder, sömn, kost, akademisk press, ekonomisk stress, studietid och några
@@ -22,17 +22,17 @@ Arbetet går hela vägen från rådata till färdig modell, i fyra notebooks:
 Till projektet hör också en **Streamlit-app**, där man ställer in en studentprofil och ser vad
 den valda modellen kommer fram till och vilka variabler som drar åt vilket håll.
 
-Ett metodval präglar hela projektet: datasetets starkaste variabel, frågan om självmordstankar,
+Ett metodval präglar hela projektet: datasetets starkaste variabel, en fråga om självmordstankar,
 är **utesluten**. Den är ett symptom på depression, inte något som kommer före den, och att ha
-kvar den hade gett en modell som mest upprepar svaret den redan fått. Se
+kvar den hade gett en modell som mest upprepar svaret den redan fått. Se mer i
 [Analysdokumentationen](docs/analys.md) för resonemanget.
 
 ---
 
 ## Resultat
 
-Fyra modeller jämfördes. Valet föll på **logistisk regression**, som är minst lika bra som de
-mer avancerade alternativen och dessutom går att tolka. Alla siffror är mätta på ett testset
+Fyra modeller jämfördes. Valet föll på **logistisk regression**, som visade sig vara minst lika bra som de
+mer avancerade alternativen. Alla siffror är mätta på ett testset
 som modellerna aldrig såg under träningen (5 569 studenter).
 
 | Modell | Accuracy | Precision | Recall | F1 | AUC-ROC (test) |
