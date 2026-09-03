@@ -336,16 +336,3 @@ else:
             "mycket — beräknat som modellens koefficient gånger det standardiserade "
             "värdet för just den här profilen."
         )
-
-# ---------------------------------------------------------------------------
-# Ansvarsfriskrivning - viktig, och sist så att den syns efter resultatet.
-# ---------------------------------------------------------------------------
-st.divider()
-st.warning(
-    "**Detta är ett skolprojekt, inte ett medicinskt verktyg.** Modellen är tränad "
-    "på enkätsvar från ett tvärsnitt utan tidsdimension — den visar samband, inte "
-    "orsak. Symptomvariabler (t.ex. självmordstankar) är medvetet uteslutna, "
-    "eftersom de ingår i själva diagnosen. Siffran ovan är en statistisk skattning "
-    "för en grupp med liknande svar, inte en bedömning av en enskild person. "
-    "Mår du eller någon i din närhet dåligt — kontakta vården."
-)
